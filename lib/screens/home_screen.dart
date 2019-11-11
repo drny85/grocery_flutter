@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import '../DUMMY_DATA.dart';
+//import '../DUMMY_DATA.dart';
 import '../widgets/product_cart_item.dart';
+import 'package:grocery_app/providers/item_service.dart';
+import 'package:provider/provider.dart';
+import 'dart:async';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -8,8 +11,36 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // void getItem() async {
+  //   http.Response response =
+  //       await http.get('https://59bbce8f.ngrok.io/api/item');
+  //       print(json.decode(response.body));
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+    // getItem();
+    //Provider.of<ItemService>(context).getItems();
+    Future.delayed(Duration.zero).then((_) async {
+      Provider.of<ItemService>(context, listen: false).getItems();
+    });
+  }
+
+  void getItems() async {
+    //final response = Provider.of(context)
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    //Provider.of<ItemService>(context).getItems();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final items = Provider.of<ItemService>(context).items;
     return Scaffold(
       body: ListView(
         children: <Widget>[
@@ -97,17 +128,17 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 Text(
                   'Most Popular',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
                 Container(
-                  height: 200,
+                  height: 275,
                   padding: const EdgeInsets.all(4),
                   //margin: const EdgeInsets.all(10.0),
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: DUMMY_DATA.length,
+                    itemCount: items.length, //DUMMY_DATA.length,
                     itemBuilder: (ctx, index) {
-                      final item = DUMMY_DATA[index];
+                      final item = items[index];
                       return ProductCardItem(item);
                     },
                   ),

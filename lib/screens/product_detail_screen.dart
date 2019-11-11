@@ -18,9 +18,12 @@ class ProductDetailScreen extends StatelessWidget {
                   height: MediaQuery.of(context).size.width - 80.0,
                   width: double.infinity,
                   color: Colors.grey,
-                  child: Image.network(
-                    item.imageURL,
-                    fit: BoxFit.cover,
+                  child: Hero(
+                    tag: item.imageURL,
+                    child: Image.network(
+                      item.imageURL,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Row(
@@ -77,6 +80,8 @@ class ProductDetailScreen extends StatelessWidget {
               height: 20,
             ),
             Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text('Item description',
                     style: TextStyle(
@@ -87,10 +92,16 @@ class ProductDetailScreen extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Text(
-                  item.description,
-                  style: TextStyle(
-                      letterSpacing: 1.1, fontStyle: FontStyle.italic),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8.0),
+                  child: Text(
+                    item.description,
+                    style: TextStyle(
+                        letterSpacing: 1.1,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 16.0),
+                  ),
                 ),
                 SizedBox(
                   height: 20,
