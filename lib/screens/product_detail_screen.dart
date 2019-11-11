@@ -9,35 +9,46 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Stack(
-              children: <Widget>[
-                Container(
-                  height: MediaQuery.of(context).size.width - 80.0,
-                  width: double.infinity,
-                  color: Colors.grey,
-                  child: Hero(
-                    tag: item.imageURL,
-                    child: Image.network(
-                      item.imageURL,
-                      fit: BoxFit.cover,
-                    ),
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              Container(
+                height: MediaQuery.of(context).size.width,
+                width: double.infinity,
+                color: Colors.grey,
+                child: Hero(
+                  tag: item.imageURL,
+                  child: Image.network(
+                    item.imageURL,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                Row(
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     IconButton(
-                      icon: Icon(Icons.arrow_back),
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: 30.0,
+                      ),
                       color: Theme.of(context).accentColor,
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                     ),
                     IconButton(
-                      icon: Icon(Icons.close),
+                      icon: Icon(
+                        Icons.close,
+                        size: 30.0,
+                      ),
                       color: Theme.of(context).accentColor,
                       onPressed: () {
                         Navigator.of(context).pop();
@@ -46,80 +57,80 @@ class ProductDetailScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Positioned(
-                  bottom: 20,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                    width: MediaQuery.of(context).size.width - 20.0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          item.name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.white,
-                            backgroundColor: Colors.black12,
-                          ),
+              ),
+              Positioned(
+                bottom: 20,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  width: MediaQuery.of(context).size.width - 20.0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        item.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.white,
+                          backgroundColor: Colors.black12,
                         ),
-                        Text(
-                          '\$${item.price}',
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87),
-                        )
-                      ],
-                    ),
+                      ),
+                      Text(
+                        '\$${item.price}',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87),
+                      )
+                    ],
                   ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text('Item description',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                        letterSpacing: 1.2)),
-                SizedBox(
-                  height: 20,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text('Item description',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                      letterSpacing: 1.2)),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8.0),
+                child: Text(
+                  item.description,
+                  style: TextStyle(
+                      letterSpacing: 1.1,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 16.0),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8.0),
-                  child: Text(
-                    item.description,
-                    style: TextStyle(
-                        letterSpacing: 1.1,
-                        fontStyle: FontStyle.italic,
-                        fontSize: 16.0),
-                  ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Text(
+                  'Add to Cart',
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
-                  height: 20,
-                ),
-                FlatButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Add to Cart',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  color: Theme.of(context).accentColor,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                )
-              ],
-            )
-          ],
-        ),
+                color: Theme.of(context).accentColor,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              )
+            ],
+          )
+        ],
       ),
     );
   }

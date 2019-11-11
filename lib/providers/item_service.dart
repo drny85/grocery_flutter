@@ -13,26 +13,31 @@ class ItemService extends ChangeNotifier {
   }
 
   void getItems() async {
-    final response = await http.get('http://59bbce8f.ngrok.io/api/item');
-    final data = json.decode(response.body) as Map<String, dynamic>;
-    //final List<Item> loadedItems = [];
-    final allItems = data['data'];
+    try {
+      final response = await http.get('http://59bbce8f.ngrok.io/api/item');
+      final data = json.decode(response.body) as Map<String, dynamic>;
+      //final List<Item> loadedItems = [];
+      final allItems = data['data'];
 
-    allItems.forEach((item) {
-      final pr = item['price'];
-      items.add(
-        Item(
-          id: item['_id'],
-          name: item['name'],
-          description: item['description'],
-          price: double.parse(pr),
-          imageURL: item['imageURL'],
-          category: item['grocery'],
-          userId: item['userId'],
-          grocery: item['grocery'],
-        ),
-      );
-    });
+      allItems.forEach((item) {
+        final pr = item['price'];
+        items.add(
+          Item(
+            id: item['_id'],
+            name: item['name'],
+            description: item['description'],
+            price: double.parse(pr),
+            imageURL: item['imageURL'],
+            category: item['grocery'],
+            userId: item['userId'],
+            grocery: item['grocery'],
+          ),
+        );
+      });
+    } catch (e) {
+      print(e);
+    }
+
     notifyListeners();
 
     //return loadedItems;
