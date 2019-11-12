@@ -27,6 +27,7 @@ class Groceries extends ChangeNotifier {
             address: grocery['address'],
             city: grocery['city'],
             state: grocery['state'],
+            imageURL: grocery['imageURL'],
             zipcode: grocery['zipcode'],
             phone: grocery['phone']);
         //userId: grocery['userId'],

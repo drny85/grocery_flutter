@@ -48,4 +48,35 @@ class Items extends ChangeNotifier {
 
     //return loadedItems;
   }
+
+  Future<void> getItemsByGrocery(String groceryId) async {
+    try {
+      final url = kUrl;
+      final response = await http.get('$url/api/item/grocery/$groceryId');
+      final data = json.decode(response.body);
+      final allItems = data['data'];
+      List<Item> loadedItems = [];
+
+      allItems.forEach((item) {
+        loadedItems.add(
+          Item(
+            id: item['_id'],
+            name: item['name'],
+            price: double.parse(item['price']),
+            description: item['description'],
+            imageURL: item['imageURL'],
+            grocery: item['grocery'],
+            userId: item['userId'],
+            category: item['category'],
+          ),
+        );
+      });
+
+      _items = loadedItems;
+
+      notifyListeners();
+    } catch (e) {
+      print(e);
+    }
+  }
 }
