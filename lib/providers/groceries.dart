@@ -11,7 +11,7 @@ class Groceries extends ChangeNotifier {
   UnmodifiableListView<Grocery> get groceries =>
       UnmodifiableListView(_groceries);
 
-  void getGroceries() async {
+  Future<void> getGroceries() async {
     try {
       final url = 'https://ac48112f.ngrok.io/api/grocery';
       final response = await http.get(url);
@@ -29,10 +29,10 @@ class Groceries extends ChangeNotifier {
             city: grocery['city'],
             state: grocery['state'],
             zipcode: grocery['zipcode'],
-            phone: grocery['phone'],
-            userId: grocery['userId'],
-            createdAt: grocery['createdAt'],
-            items: grocery['items']);
+            phone: grocery['phone']);
+        //userId: grocery['userId'],
+        //createdAt: grocery['createdAt']);
+        //items: grocery['items']);
         _groceries.add(tempGrocery);
       });
 
