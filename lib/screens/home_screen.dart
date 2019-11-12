@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-//import '../DUMMY_DATA.dart';
+//import 'package:grocery_app/models/category.dart';
+import 'package:grocery_app/providers/categories.dart';
+import 'package:grocery_app/providers/groceries.dart';
+
 import '../widgets/product_cart_item.dart';
-import 'package:grocery_app/providers/item_service.dart';
+import 'package:grocery_app/providers/items.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
 
@@ -23,7 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
     // getItem();
     //Provider.of<ItemService>(context).getItems();
     Future.delayed(Duration.zero).then((_) async {
-      Provider.of<ItemService>(context, listen: false).getItems();
+      Provider.of<Items>(context, listen: false).getItems();
+      Provider.of<Groceries>(context, listen: false).getGroceries();
+      Provider.of<Categories>(context, listen: false).getCategories();
     });
   }
 
@@ -32,15 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    //Provider.of<ItemService>(context).getItems();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final items = Provider.of<ItemService>(context).items;
+    final items = Provider.of<Items>(context).items;
+
     return Scaffold(
       body: ListView(
         children: <Widget>[
@@ -50,76 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
               'What are you craving for today?',
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.grey.withOpacity(0.2),
-                ),
-                child: Icon(
-                  Icons.audiotrack,
-                  color: Theme.of(context).accentColor,
-                  size: 30.0,
-                ),
-              ),
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.grey.withOpacity(0.2),
-                ),
-                child: Icon(
-                  Icons.restaurant,
-                  color: Theme.of(context).accentColor,
-                  size: 30.0,
-                ),
-              ),
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.grey.withOpacity(0.2),
-                ),
-                child: Icon(
-                  Icons.home,
-                  color: Theme.of(context).accentColor,
-                  size: 30.0,
-                ),
-              ),
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.grey.withOpacity(0.2),
-                ),
-                child: Icon(
-                  Icons.hotel,
-                  color: Theme.of(context).accentColor,
-                  size: 30.0,
-                ),
-              ),
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: Colors.grey.withOpacity(0.2),
-                ),
-                child: Icon(
-                  Icons.fastfood,
-                  color: Theme.of(context).accentColor,
-                  size: 30.0,
-                ),
-              ),
-            ],
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20.0, left: 12.0),

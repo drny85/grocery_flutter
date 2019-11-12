@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grocery_app/providers/item_service.dart';
+import 'package:grocery_app/providers/categories.dart';
+import 'package:grocery_app/providers/groceries.dart';
+import 'package:grocery_app/providers/items.dart';
 import './screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -9,8 +11,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      builder: (contect) => ItemService(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(
+          value: Items(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Groceries(),
+        ),
+        ChangeNotifierProvider.value(
+          value: Categories(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
