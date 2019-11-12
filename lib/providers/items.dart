@@ -14,7 +14,7 @@ class Items extends ChangeNotifier {
     return _items;
   }
 
-  void getItems() async {
+  Future<void> getItems() async {
     try {
       final url = kUrl;
       final response = await http.get('$url/api/item');

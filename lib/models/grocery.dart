@@ -1,4 +1,4 @@
-import './item_model.dart';
+//import './item_model.dart';
 
 class Grocery {
   final String id;
@@ -8,9 +8,10 @@ class Grocery {
   final String state;
   final String zipcode;
   final String phone;
-  final List<Item> items;
-  final String userId;
-  final DateTime createdAt;
+  final String imageURL;
+  //final List<Item> items;
+  //final String userId;
+  //final DateTime createdAt;
 
   Grocery(
       {this.id,
@@ -19,8 +20,9 @@ class Grocery {
       this.city,
       this.state,
       this.phone,
-      this.items,
-      this.createdAt,
-      this.userId,
+      this.imageURL,
+      // this.items,
+      //this.createdAt,
+      //this.userId,
       this.zipcode});
 }

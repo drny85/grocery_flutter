@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/providers/groceries.dart';
+import 'package:grocery_app/widgets/grocery_cart_item.dart';
 import 'package:provider/provider.dart';
 
 class GroceriesScreen extends StatelessWidget {
@@ -42,7 +43,9 @@ class GroceriesScreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               print(data.groceries[index]);
                               final grocery = data.groceries[index];
-                              return Text(grocery.name);
+                              return GroceryCardItem(
+                                grocery: grocery,
+                              );
                             },
                           );
                         },

@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Groceries extends ChangeNotifier {
-  final List<Grocery> _groceries = [];
+  List<Grocery> _groceries = [];
 
   UnmodifiableListView<Grocery> get groceries =>
       UnmodifiableListView(_groceries);
@@ -17,10 +17,9 @@ class Groceries extends ChangeNotifier {
       final response = await http.get(url);
       final data = json.decode(response.body) as Map<String, dynamic>;
       final allGroceries = data['data'];
+      List<Grocery> loadedGroceries = [];
       //print(data);
-      if (_groceries.length < 1) {
-        return;
-      }
+
       allGroceries.forEach((grocery) {
         final tempGrocery = Grocery(
             id: grocery['_id'],
@@ -33,9 +32,9 @@ class Groceries extends ChangeNotifier {
         //userId: grocery['userId'],
         //createdAt: grocery['createdAt']);
         //items: grocery['items']);
-        _groceries.add(tempGrocery);
+        loadedGroceries.add(tempGrocery);
       });
-
+      _groceries = loadedGroceries;
       notifyListeners();
     } catch (e) {
       print(e);
