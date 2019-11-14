@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
+import 'package:grocery_app/models/category.dart';
 
 class Item {
   final String id;
   final String name;
   final double price;
   final String description;
-  final String category;
+  final Category category;
   final String imageURL;
   final String grocery;
   final String userId;

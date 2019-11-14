@@ -7,21 +7,22 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Categories extends ChangeNotifier {
-  final List<Category> _categories = [];
+  List<Category> _categories = [];
 
   UnmodifiableListView<Category> get categories =>
       UnmodifiableListView(_categories);
 
-  void getCategories() async {
+  Future<void> getCategories() async {
     try {
       const url = kUrl;
       final response = await http.get('$url/api/category');
-      final data = json.decode(response.body);
+      final data = json.decode(response.body) as Map<String, dynamic>;
       final allCategories = data['data'];
+      List<Category> loadedCategories = [];
 
-      if (_categories.length < 1) {
-        return;
-      }
+      // if (_categories.length < 1) {
+      //   return;
+      // }
 
       allCategories.forEach((category) {
         final cat = Category(
@@ -31,8 +32,10 @@ class Categories extends ChangeNotifier {
           userId: category['userId'],
         );
 
-        _categories.add(cat);
+        loadedCategories.add(cat);
       });
+
+      _categories = loadedCategories;
 
       notifyListeners();
     } catch (e) {

@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+
+import 'package:grocery_app/providers/categories.dart';
+
+import 'package:grocery_app/widgets/go_back_arrow.dart';
+import 'package:grocery_app/widgets/item_category_view.dart';
+//import 'package:grocery_app/widgets/item_category_view.dart';
 //import 'package:grocery_app/models/category.dart';
 // import 'package:grocery_app/providers/categories.dart';
 // import 'package:grocery_app/providers/groceries.dart';
@@ -22,22 +28,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // getItem();
-    //Provider.of<ItemService>(context).getItems();
-    // Future.delayed(Duration.zero).then((_) async {
-    //   //Provider.of<Items>(context, listen: false).getItems();
-    //   // Provider.of<Groceries>(context, listen: false).getGroceries();
-    //   // Provider.of<Categories>(context, listen: false).getCategories();
-    // });
-  }
-
-  void getItems() async {
-    //final response = Provider.of(context)
+    Future.delayed(Duration.zero).then((_) {
+      Provider.of<Categories>(context).getCategories();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final items = Provider.of<Items>(context).items;
+    final categories = Provider.of<Categories>(context).categories;
 
     return Scaffold(
       appBar: items.length < 1
@@ -51,6 +50,12 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           : ListView(
               children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    GoBackIcon(),
+                  ],
+                ),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Text(
@@ -59,14 +64,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0, left: 12.0),
+                  padding: const EdgeInsets.only(top: 30.0, left: 12.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
-                        'Most Popular',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Most Popular (${items.length})',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
                       ),
                       Container(
                         height: 275,
@@ -80,7 +88,22 @@ class _HomeScreenState extends State<HomeScreen> {
                             return ProductCardItem(item);
                           },
                         ),
-                      )
+                      ),
+                      ItemCategoriesView(
+                        items: items
+                            .where((item) => item.category.name == 'juices')
+                            .toList(),
+                        categoryName: 'One',
+                      ),
+                      for (var i = 0; i < categories.length; i++)
+                        ItemCategoriesView(
+                          items: items.where((item) {
+                            final category = categories[i];
+
+                            return item.category.name == category.name;
+                          }).toList(),
+                          categoryName: categories[i].name.toUpperCase(),
+                        ),
                     ],
                   ),
                 )

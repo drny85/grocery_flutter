@@ -22,6 +22,13 @@ class GroceryCardItem extends StatelessWidget {
         height: MediaQuery.of(context).size.height / 3,
         decoration: BoxDecoration(
           color: Colors.black38,
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                blurRadius: 5.0,
+                offset: Offset(2.0, 5.0),
+                spreadRadius: 6.0)
+          ],
           borderRadius: BorderRadius.circular(20),
         ),
         child: Stack(
@@ -42,7 +49,8 @@ class GroceryCardItem extends StatelessWidget {
                 style: TextStyle(
                     backgroundColor: Colors.black26,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 24,
+                    color: Colors.white70,
                     letterSpacing: 2.0,
                     fontFamily: 'RobotoCondensed'),
               ),
@@ -53,7 +61,12 @@ class GroceryCardItem extends StatelessWidget {
                 height: 100,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                    color: Colors.black54,
+                    //color: Colors.black54,
+                    gradient: LinearGradient(
+                      colors: [Colors.black, Colors.black38, Colors.black54],
+                      begin: Alignment.bottomRight,
+                      end: Alignment.topRight,
+                    ),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(20.0),
                         bottomRight: Radius.circular(20.0))),

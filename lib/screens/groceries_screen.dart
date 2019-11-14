@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/providers/groceries.dart';
-import 'package:grocery_app/widgets/grocery_cart_item.dart';
+import 'package:grocery_app/widgets/grocery_card_item.dart';
 import 'package:provider/provider.dart';
 
 class GroceriesScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class GroceriesScreen extends StatelessWidget {
       body: Column(
         children: <Widget>[
           SizedBox(
-            height: 50.0,
+            height: 40.0,
           ),
           Text(
             'Your nearby stores',
@@ -37,11 +37,9 @@ class GroceriesScreen extends StatelessWidget {
                       // we got data
                       return Consumer<Groceries>(
                         builder: (context, data, child) {
-                          print(data.groceries.length);
                           return ListView.builder(
                             itemCount: data.groceries.length,
                             itemBuilder: (context, index) {
-                              print(data.groceries[index]);
                               final grocery = data.groceries[index];
                               return GroceryCardItem(
                                 grocery: grocery,

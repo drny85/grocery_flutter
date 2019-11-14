@@ -1,9 +1,9 @@
-import 'grocery.dart';
+//import 'grocery.dart';
 
 class Category {
   final String id;
   final String name;
-  final Grocery grocery;
+  final String grocery;
   final String userId;
 
   Category({

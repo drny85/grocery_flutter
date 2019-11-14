@@ -1,6 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:grocery_app/utils/constant.dart';
 import '../models/grocery.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -13,7 +14,7 @@ class Groceries extends ChangeNotifier {
 
   Future<void> getGroceries() async {
     try {
-      final url = 'https://ac48112f.ngrok.io/api/grocery';
+      final url = '$kUrl/api/grocery';
       final response = await http.get(url);
       final data = json.decode(response.body) as Map<String, dynamic>;
       final allGroceries = data['data'];

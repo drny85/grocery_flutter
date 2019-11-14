@@ -19,7 +19,7 @@ class ProductDetailScreen extends StatelessWidget {
                 width: double.infinity,
                 color: Colors.grey,
                 child: Hero(
-                  tag: item.imageURL,
+                  tag: item.id,
                   child: Image.network(
                     item.imageURL,
                     fit: BoxFit.cover,
