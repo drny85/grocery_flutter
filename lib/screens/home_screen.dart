@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Container(
-                        height: 275,
+                        height: 300,
                         padding: const EdgeInsets.all(4),
                         //margin: const EdgeInsets.all(10.0),
                         child: ListView.builder(
@@ -85,15 +85,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemCount: items.length, //DUMMY_DATA.length,
                           itemBuilder: (ctx, index) {
                             final item = items[index];
-                            return ProductCardItem(item);
+                            return ProductCardItem(item, 250.0);
                           },
                         ),
                       ),
-                      ItemCategoriesView(
-                        items: items
-                            .where((item) => item.category.name == 'juices')
-                            .toList(),
-                        categoryName: 'One',
+                      Divider(
+                        height: 2.0,
+                        color: Colors.grey,
                       ),
                       for (var i = 0; i < categories.length; i++)
                         ItemCategoriesView(

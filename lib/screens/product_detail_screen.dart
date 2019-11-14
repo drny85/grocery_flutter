@@ -18,12 +18,9 @@ class ProductDetailScreen extends StatelessWidget {
                 height: MediaQuery.of(context).size.width,
                 width: double.infinity,
                 color: Colors.grey,
-                child: Hero(
-                  tag: item.id,
-                  child: Image.network(
-                    item.imageURL,
-                    fit: BoxFit.cover,
-                  ),
+                child: Image.network(
+                  item.imageURL,
+                  fit: BoxFit.cover,
                 ),
               ),
               SizedBox(

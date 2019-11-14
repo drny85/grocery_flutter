@@ -29,7 +29,7 @@ class ItemCategoriesView extends StatelessWidget {
                   itemCount: items.length, //DUMMY_DATA.length,
                   itemBuilder: (ctx, index) {
                     final item = items[index];
-                    return items.length > 0 ? ProductCardItem(item) : null;
+                    return items.length > 0 ? ProductCardItem(item, 320) : null;
                   },
                 ),
               ),
