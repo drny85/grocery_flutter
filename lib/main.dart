@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/providers/cart.dart';
 
 import 'package:grocery_app/providers/categories.dart';
 import 'package:grocery_app/providers/groceries.dart';
 import 'package:grocery_app/providers/items.dart';
-import 'package:grocery_app/screens/groceries_screen.dart';
+import 'package:grocery_app/screens/home_screen.dart';
 //import './screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -24,12 +25,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Categories(),
         ),
+        ChangeNotifierProvider.value(
+          value: ShoppingCart(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           accentColor: Colors.deepOrange,
+
           primaryColor: Color.fromRGBO(244, 244, 245, 1),
+
           fontFamily: 'Montserrat',
 
           // This is the theme of your application.
@@ -43,7 +49,7 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           //primarySwatch: Colors.
         ),
-        home: GroceriesScreen(),
+        home: HomeScreen(),
       ),
     );
   }

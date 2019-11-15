@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/providers/cart.dart';
+import 'package:provider/provider.dart';
 import '../models/item_model.dart';
 
 class ProductDetailScreen extends StatelessWidget {
@@ -116,7 +118,9 @@ class ProductDetailScreen extends StatelessWidget {
                 height: 20,
               ),
               FlatButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await Provider.of<ShoppingCart>(context).addToCart(item);
+                },
                 child: Text(
                   'Add to Cart',
                   style: TextStyle(fontWeight: FontWeight.bold),

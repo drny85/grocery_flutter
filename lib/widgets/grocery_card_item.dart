@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/models/grocery.dart';
 import 'package:grocery_app/providers/items.dart';
-import 'package:grocery_app/screens/home_screen.dart';
+import 'package:grocery_app/screens/items_screens.dart';
 import 'package:grocery_app/utils/constant.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +14,8 @@ class GroceryCardItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         Provider.of<Items>(context).getItemsByGrocery(grocery.id);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ItemsScreen(grocery.name)));
       },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
